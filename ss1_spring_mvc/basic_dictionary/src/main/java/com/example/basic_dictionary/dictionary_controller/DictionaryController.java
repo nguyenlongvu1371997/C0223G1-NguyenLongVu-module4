@@ -13,7 +13,7 @@ import java.util.HashMap;
 @Controller
 public class DictionaryController {
     @Autowired
-    IDictionaryService dictionaryService;
+    private IDictionaryService dictionaryService;
 
     @GetMapping("/dictionary")
     public String dictionary() {
