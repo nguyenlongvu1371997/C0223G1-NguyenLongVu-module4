@@ -14,8 +14,16 @@ public class SandwichController {
     @Autowired
     private ISandwichService sandwichService;
 
+    @GetMapping("")
+    public String sandwich() {
+        return "index";
+    }
+
     @PostMapping("/index")
-    public String sandwich(@RequestParam("sandwich") String[] condiments, Model model) {
+    public String sandwich(@RequestParam(value = "sandwich", required = false) String[] condiments, Model model) {
+        if (condiments == null) {
+            return "index";
+        }
         System.out.println(condiments.length);
         model.addAttribute("list", sandwichService.condiments(condiments));
         return "condiment-list";
