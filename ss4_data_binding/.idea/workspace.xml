@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="91dd52e6-191a-4a03-bc51-2da2d05202cc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/AppConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/AppInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/model/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/repository/IProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/repository/ProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/java/com/example/product_management/service/IProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/webapp/WEB-INF/views/addProduct.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ss3_thymeleaf/product_management/src/main/webapp/WEB-INF/views/showList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ss2_spring_controller/caculator/src/main/java/com/example/calculator/service/CalculatorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ss2_spring_controller/caculator/src/main/java/com/example/calculator/service/CalculatorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuring_email/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/configuring_email/.idea/gradle.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2RSaYqqYstvnchKshK2vIIgQxyS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/configuring_email" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="91dd52e6-191a-4a03-bc51-2da2d05202cc" name="Changes" comment="" />
+      <created>1687245987005</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687245987005</updated>
+      <workItem from="1687245988094" duration="35000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

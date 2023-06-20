@@ -18,7 +18,7 @@ public class CalculatorService implements ICalculatorService {
                 result = multiply(number1, number2);
                 break;
             case "divide":
-                if (number1 == 0) {
+                if (number2 == 0) {
                     return "Không tính được";
                 }
                 result = divide(number1, number2);
