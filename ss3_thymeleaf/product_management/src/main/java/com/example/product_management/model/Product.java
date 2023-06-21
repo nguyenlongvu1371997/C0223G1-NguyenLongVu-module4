@@ -1,12 +1,23 @@
 package com.example.product_management.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private double price;
 
     public Product(int id, String name, double price) {
         this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
     }

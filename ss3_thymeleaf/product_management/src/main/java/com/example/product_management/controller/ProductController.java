@@ -9,55 +9,65 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @GetMapping("/showList")
+    @GetMapping("/product/list")
     public String showList(Model model) {
         model.addAttribute("list", this.productService.showList());
         return "showList";
     }
 
-    @GetMapping("/addProduct")
+    @GetMapping("/product/add")
     public String addProduct(Model model) {
         model.addAttribute("product", new Product());
         return "addProduct";
     }
 
-    @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute Product product) {
+    @PostMapping("/product/add")
+    public String addProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         this.productService.add(product);
-        return "addProduct";
+        redirectAttributes.addFlashAttribute("massage", "thêm mới thành công");
+        return "redirect:/product/add";
     }
 
-    @PostMapping("/deleteProduct")
-    public String deleteProduct(@RequestParam int id) {
+    @PostMapping("/product/delete")
+    public String deleteProduct(@RequestParam int id, RedirectAttributes redirectAttributes) {
         System.out.println(id);
         this.productService.delete(id);
-        return "redirect:/showList";
+        redirectAttributes.addFlashAttribute("massage", "xóa thành công");
+        return "redirect:/product/list";
     }
-    @GetMapping("/editProduct")
-    public String editProduct(@RequestParam int id,Model model){
+
+    @GetMapping("/product/edit")
+    public String editProduct(@RequestParam int id, Model model) {
         model.addAttribute("product", productService.findById(id));
         return "editProduct";
     }
-    @PostMapping("/editProduct")
-    public String editProduct(@ModelAttribute Product product){
+
+    @PostMapping("/product/edit")
+    public String editProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         this.productService.edit(product);
-        return "redirect:/showList";
+        redirectAttributes.addFlashAttribute("massage", "sửa thành công");
+        return "redirect:/product/list";
     }
 
-    @PostMapping("/detailProduct")
-    public String detailProduct(@RequestParam int id,Model model){
-        model.addAttribute("product",productService.findById(id));
+    @PostMapping("/product/detail")
+    public String detailProduct(@RequestParam int id, Model model) {
+        model.addAttribute("product", productService.findById(id));
         return "detailProduct";
     }
 
-    @GetMapping("/findProduct")
-    public String findProduct(@RequestParam String name,Model model) {
+    @GetMapping("/product/find")
+    public String findProduct(@RequestParam String name, Model model, RedirectAttributes redirectAttributes) {
+        if (this.productService.findProduct(name) == null) {
+            redirectAttributes.addFlashAttribute("massage", "không tìm thấy");
+            return "redirect:/product/list";
+        }
         model.addAttribute("list", this.productService.findProduct(name));
         return "showList";
     }

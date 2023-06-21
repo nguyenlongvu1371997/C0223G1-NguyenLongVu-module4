@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/showList">Quay lại sách sản phẩm</a>
-<form action="/editProduct" method="post" th:object="${product}">
+<a href="/product/list">Quay lại sách sản phẩm</a>
+<form action="/product/edit" method="post" th:object="${product}">
     <input name="id" type="number" th:value="${product.id}" hidden/>
     <input name="name" th:value="${product.name}"/>
     <input name="price" type="number" th:value="${product.price}"/>

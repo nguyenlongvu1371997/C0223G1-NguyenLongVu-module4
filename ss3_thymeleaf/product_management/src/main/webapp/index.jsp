@@ -5,6 +5,6 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<a href="/showList">Hiện danh sách sản phẩm</a>
+<a href="/product/list">Hiện danh sách sản phẩm</a>
 </body>
 </html>

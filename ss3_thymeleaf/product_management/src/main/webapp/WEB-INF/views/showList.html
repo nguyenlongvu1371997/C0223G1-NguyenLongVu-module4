@@ -5,8 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/addProduct">Thêm mới sản phẩm</a>
-<form method="get" action="/findProduct">
+<a href="/product/add">Thêm mới sản phẩm</a>
+<div th:if="${massage!=null}" th:text="${massage}"></div>
+<form method="get" action="/product/find">
     Nhập tên: <input name="name">
     <button type="submit">Tìm</button>
 </form>
@@ -22,19 +23,19 @@
         <td th:text="${product.name}"></td>
         <td th:text="${product.price}"></td>
         <td>
-            <form method="post" action="/deleteProduct">
+            <form method="post" action="/product/delete">
                 <input name="id" th:value="${product.id}" hidden>
                 <button type="submit">Xóa</button>
             </form>
         </td>
         <td>
-            <form method="get" action="/editProduct">
+            <form method="get" action="/product/edit">
                 <input name="id" th:value="${product.id}" hidden>
                 <button type="submit">Sửa</button>
             </form>
         </td>
         <td>
-            <form method="post" action="/detailProduct">
+            <form method="post" action="/product/detail">
                 <input name="id" th:value="${product.id}" hidden>
                 <button type="submit">Xem chi tiết</button>
             </form>

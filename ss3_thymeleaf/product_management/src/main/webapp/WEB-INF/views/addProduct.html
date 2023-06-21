@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/showList">Quay lại sách sản phẩm</a>
-<form action="/addProduct" method="post" th:object="${product}">
-    <input name="id" type="number" th:field="*{id}"/>
+<a href="/product/list">Quay lại sách sản phẩm</a>
+<div th:if="${massage!=null}" th:text="${massage}"></div>
+<form action="/product/add" method="post" th:object="${product}">
     <input name="name"  th:field="*{name}"/>
     <input name="price" type="number" th:field="*{price}"/>
     <button type="submit">Thêm</button>
