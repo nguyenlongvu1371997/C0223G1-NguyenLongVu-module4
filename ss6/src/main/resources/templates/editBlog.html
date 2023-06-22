@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/blog">Quay về danh sách</a>
+<form action="/blog/edit" method="post" th:object="${blog}">
+    <input name="id" th:value="${blog.id}" hidden>
+    Tên<input name="name" th:field="*{name}" th:value="${blog.name}">
+    Ngày<input type="date" name="date" th:field="*{date}" th:value="${blog.date}">
+    Tác giả<input name="author" th:field="*{author}" th:value="${blog.author}">
+    Nội dung<input name="content" th:field="*{content}" th:value="${blog.content}">
+    <button type="submit">Sửa</button>
+</form>
+</body>
+</html>

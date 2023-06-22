@@ -5,68 +5,85 @@ import com.example.product_management.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/product")
 public class ProductController {
+
     @Autowired
     private IProductService productService;
 
-    @GetMapping("/product/list")
+    @GetMapping("/list")
     public String showList(Model model) {
         model.addAttribute("list", this.productService.showList());
         return "showList";
     }
 
-    @GetMapping("/product/add")
+    @GetMapping("/add")
     public String addProduct(Model model) {
         model.addAttribute("product", new Product());
         return "addProduct";
     }
 
-    @PostMapping("/product/add")
+    @PostMapping("/add")
     public String addProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         this.productService.add(product);
         redirectAttributes.addFlashAttribute("massage", "thêm mới thành công");
-        return "redirect:/product/add";
+        return "redirect:add";
     }
 
-    @PostMapping("/product/delete")
+    @PostMapping("/delete")
     public String deleteProduct(@RequestParam int id, RedirectAttributes redirectAttributes) {
-        System.out.println(id);
+        if(this.productService.findById(id)==null){
+            redirectAttributes.addFlashAttribute("massage", "không tìm thấy sản phẩm");
+            return "redirect:list";
+        }
         this.productService.delete(id);
         redirectAttributes.addFlashAttribute("massage", "xóa thành công");
-        return "redirect:/product/list";
+        return "redirect:list";
     }
 
-    @GetMapping("/product/edit")
-    public String editProduct(@RequestParam int id, Model model) {
+    @GetMapping("/edit")
+    public String editProduct(@RequestParam int id, Model model, RedirectAttributes redirectAttributes) {
+        if(this.productService.findById(id)==null){
+            redirectAttributes.addFlashAttribute("massage", "không tìm thấy sản phẩm");
+            return "redirect:list";
+        }
         model.addAttribute("product", productService.findById(id));
         return "editProduct";
     }
 
-    @PostMapping("/product/edit")
+    @PostMapping("/edit")
     public String editProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
+        if(this.productService.findById(product.getId())==null){
+            redirectAttributes.addFlashAttribute("massage", "không tìm thấy sản phẩm");
+            return "redirect:list";
+        }
         this.productService.edit(product);
         redirectAttributes.addFlashAttribute("massage", "sửa thành công");
-        return "redirect:/product/list";
+        return "redirect:list";
     }
 
-    @PostMapping("/product/detail")
-    public String detailProduct(@RequestParam int id, Model model) {
+    @PostMapping("/detail")
+    public String detailProduct(@RequestParam int id, Model model, RedirectAttributes redirectAttributes) {
+        if(this.productService.findById(id)==null){
+            redirectAttributes.addFlashAttribute("massage", "không tìm thấy sản phẩm");
+            return "redirect:list";
+        }
         model.addAttribute("product", productService.findById(id));
         return "detailProduct";
     }
 
-    @GetMapping("/product/find")
+    @GetMapping("/find")
     public String findProduct(@RequestParam String name, Model model, RedirectAttributes redirectAttributes) {
-        if (this.productService.findProduct(name) == null) {
+        if(name.equals("")){
+            return "redirect:list";
+        }
+        if (this.productService.findProduct(name).size()==0) {
             redirectAttributes.addFlashAttribute("massage", "không tìm thấy");
-            return "redirect:/product/list";
+            return "redirect:list";
         }
         model.addAttribute("list", this.productService.findProduct(name));
         return "showList";

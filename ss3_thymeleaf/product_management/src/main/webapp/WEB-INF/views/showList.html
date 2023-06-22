@@ -7,7 +7,7 @@
 <body>
 <a href="/product/add">Thêm mới sản phẩm</a>
 <div th:if="${massage!=null}" th:text="${massage}"></div>
-<form method="get" action="/product/find">
+<form method="get" action="/product/find" th:value="">
     Nhập tên: <input name="name">
     <button type="submit">Tìm</button>
 </form>
