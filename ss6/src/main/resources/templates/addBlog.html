@@ -9,9 +9,14 @@
 <div th:if="${messages!=null}" th:text="${message}"></div>
 <form action="/blog/add" method="post" th:object="${blog}">
     Tên<input name="name" th:field="*{name}">
+    <input name="flagDelete" th:field="*{flagDelete}" th:value="false" hidden>
     Ngày<input type="date" name="date" th:field="*{date}">
     Tác giả<input name="author" th:field="*{author}">
     Nội dung<input name="content" th:field="*{content}">
+    <select name="blogTypes" th:field="*{blogType}" >
+        <option th:each="blogType, iterStats : ${blogTypes}" th:value="${blogType.id}" th:text="${blogType.name}">
+        </option>
+    </select>
     <button type="submit">Thêm</button>
 </form>
 </body>

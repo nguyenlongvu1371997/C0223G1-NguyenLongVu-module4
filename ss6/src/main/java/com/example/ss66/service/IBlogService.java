@@ -1,11 +1,13 @@
 package com.example.ss66.service;
 
 import com.example.ss66.model.Blog;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface IBlogService {
-    List<Blog> displayList();
+    Page<Blog> displayList(Pageable pageable);
 
     void addBlog(Blog blog);
 
@@ -14,4 +16,5 @@ public interface IBlogService {
     List<Blog> findByName(String name);
 
     void delete(int id);
+
 }

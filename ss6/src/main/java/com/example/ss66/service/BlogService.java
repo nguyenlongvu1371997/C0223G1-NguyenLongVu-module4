@@ -3,6 +3,8 @@ package com.example.ss66.service;
 import com.example.ss66.model.Blog;
 import com.example.ss66.repository.IBlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +15,8 @@ public class BlogService implements IBlogService {
     private IBlogRepository blogRepository;
 
     @Override
-    public List<Blog> displayList() {
-        return blogRepository.findAll();
+    public Page<Blog> displayList(Pageable pageable) {
+        return blogRepository.findAllByFlagDeleteIsFalse(pageable);
     }
 
     @Override
@@ -36,6 +38,8 @@ public class BlogService implements IBlogService {
 
     @Override
     public void delete(int id) {
-        blogRepository.deleteById(id);
+        Blog blog = blogRepository.findById(id).get();
+        blog.setFlagDelete(true);
+        blogRepository.save(blog);
     }
 }

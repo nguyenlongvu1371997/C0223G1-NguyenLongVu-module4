@@ -12,6 +12,10 @@
     Ngày<input type="date" name="date" th:field="*{date}" th:value="${blog.date}">
     Tác giả<input name="author" th:field="*{author}" th:value="${blog.author}">
     Nội dung<input name="content" th:field="*{content}" th:value="${blog.content}">
+    <select name="blogTypes" th:field="*{blogType}" th:selected="${blog.blogType.id}" >
+        <option th:each="blogType, iterStats : ${blogTypes}" th:value="${blogType.id}" th:text="${blogType.name}">
+        </option>
+    </select>
     <button type="submit">Sửa</button>
 </form>
 </body>

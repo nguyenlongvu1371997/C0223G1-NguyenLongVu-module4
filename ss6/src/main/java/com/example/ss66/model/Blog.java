@@ -1,5 +1,7 @@
 package com.example.ss66.model;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 
 
@@ -7,12 +9,45 @@ import javax.persistence.*;
 @Table(name = "blogs")
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String date;
     private String author;
+    @Column(length = 2000)
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "type_of_blog_id", nullable = false)
+    private BlogType blogType;
+    private boolean flagDelete;
+
+    public Blog(String name, String date, String author, String content, BlogType blogType, boolean flagDelete) {
+        this.name = name;
+        this.date = date;
+        this.author = author;
+        this.content = content;
+        this.blogType = blogType;
+        this.flagDelete = flagDelete;
+    }
+
+    public Blog(int id, String name, String date, String author, String content, BlogType blogType, boolean isDelete) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.author = author;
+        this.content = content;
+        this.blogType = blogType;
+        this.flagDelete = isDelete;
+    }
+
+    public Blog(int id, String name, String date, String author, String content, BlogType blogType) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.author = author;
+        this.content = content;
+        this.blogType = blogType;
+    }
 
     public Blog(int id, String name, String date, String author, String content) {
         this.id = id;
@@ -71,4 +106,29 @@ public class Blog {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public BlogType getTypeOfBlog() {
+        return blogType;
+    }
+
+    public void setTypeOfBlog(BlogType blogType) {
+        this.blogType = blogType;
+    }
+
+    public BlogType getBlogType() {
+        return blogType;
+    }
+
+    public void setBlogType(BlogType blogType) {
+        this.blogType = blogType;
+    }
+
+    public boolean getFlagDelete() {
+        return flagDelete;
+    }
+
+    public void setFlagDelete(boolean flagDelete) {
+        this.flagDelete = flagDelete;
+    }
+
 }
