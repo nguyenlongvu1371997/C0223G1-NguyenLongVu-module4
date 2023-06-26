@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/song/create">Thêm mới</a>
+<form action="/song" method="get">
+<table>
+    <tr>
+        <td>Tên nghệ sĩ</td>
+        <td>Tên bài hát</td>
+        <td>Thể loại</td>
+    </tr>
+    <tr th:each="song, iterStats : ${list}">
+        <td th:text="${song.artist}"></td>
+        <td th:text="${song.name}"></td>
+        <td th:text="${song.kindOfMusic}"></td>
+    </tr>
+</table>
+    <div class="d-flex">
+        <a th:if="${list.hasPrevious()}"
+           th:href="@{/song(page=${list.number - 1})}">Trang trước</a>
+        <a th:if="${list.hasNext()}"
+           th:href="@{/song(page=${list.number + 1})}">Trang sau</a>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/users/create" th:object="${usersCreateDto}">
+    <p th:if="${msg}" th:text="${msg}">
+    <table>
+        <tr>
+            <td>Tên</td>
+            <td><input th:field="*{firstName}">
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></td>
+
+        </tr>
+        <tr>
+            <td> Họ</td>
+            <td><input th:field="*{lastName}">
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>Tuổi</td>
+            <td><input type="number" th:field="*{age}">
+                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td> Sđt</td>
+            <td><input th:field="*{phoneNumber}">
+                <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input th:field="*{email}"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Gửi</button>
+</form>
+</body>
+</html>
