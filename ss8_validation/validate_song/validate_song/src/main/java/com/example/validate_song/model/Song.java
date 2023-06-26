@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "song")
 public class Song {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String artist;
@@ -14,6 +14,13 @@ public class Song {
     private boolean deleteIsTrue;
 
     public Song() {
+    }
+
+    public Song(String name, String artist, String kindOfMusic, boolean deleteIsTrue) {
+        this.name = name;
+        this.artist = artist;
+        this.kindOfMusic = kindOfMusic;
+        this.deleteIsTrue = deleteIsTrue;
     }
 
     public Song(int id, String name, String artist, String kindOfMusic, boolean deleteIsTrue) {
@@ -24,12 +31,6 @@ public class Song {
         this.deleteIsTrue = deleteIsTrue;
     }
 
-    public Song(String name, String artist, String kindOfMusic, boolean deleteIsTrue) {
-        this.name = name;
-        this.artist = artist;
-        this.kindOfMusic = kindOfMusic;
-        this.deleteIsTrue = deleteIsTrue;
-    }
 
     public int getId() {
         return id;

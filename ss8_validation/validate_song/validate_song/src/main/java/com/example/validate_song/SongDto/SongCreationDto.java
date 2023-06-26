@@ -9,16 +9,17 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class SongCreationDto implements Validator {
+    private int id;
     @NotBlank(message = "không được để trống")
-    @Size(max=800, message = "không được quá 800 kí tự")
+    @Size(max = 800, message = "không được quá 800 kí tự")
     @Pattern(regexp = "^\\w+(\\s{1}\\w+)*$")
     private String name;
     @NotBlank(message = "không được để trống")
-    @Size(max=300, message = "không được quá 300 kí tự")
+    @Size(max = 300, message = "không được quá 300 kí tự")
     @Pattern(regexp = "^\\w+(\\s{1}\\w+)*$")
     private String artist;
     @NotBlank(message = "không được để trống")
-    @Size(max=1000, message = "không được quá 1000 kí tự")
+    @Size(max = 1000, message = "không được quá 1000 kí tự")
     @Pattern(regexp = "^\\w+(\\s{1}\\w+)*((,\\s){1}\\w+(\\s{1}\\w+)*)*$")
     private String kindOfMusic;
     private boolean deleteIsTrue;
@@ -30,7 +31,23 @@ public class SongCreationDto implements Validator {
         this.deleteIsTrue = deleteIsTrue;
     }
 
+    public SongCreationDto(int id, String name, String artist, String kindOfMusic, boolean deleteIsTrue) {
+        this.id = id;
+        this.name = name;
+        this.artist = artist;
+        this.kindOfMusic = kindOfMusic;
+        this.deleteIsTrue = deleteIsTrue;
+    }
+
     public SongCreationDto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -9,6 +9,8 @@ import java.util.List;
 public interface IBlogService {
     Page<Blog> displayList(Pageable pageable);
 
+    List<Blog> displayListByType(int type, Pageable pageable);
+
     void addBlog(Blog blog);
 
     Blog findById(int id);

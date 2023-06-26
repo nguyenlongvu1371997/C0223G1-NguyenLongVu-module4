@@ -14,4 +14,5 @@ public class BlogTypeService implements IBlogTypeService{
     public List<BlogType> getBlogTypes() {
         return blogTypeRepository.findAll();
     }
+
 }

@@ -20,6 +20,11 @@ public class BlogService implements IBlogService {
     }
 
     @Override
+    public List<Blog> displayListByType(int type, Pageable pageable) {
+        return blogRepository.findAllByTypeOfBlogIs(type,pageable);
+    }
+
+    @Override
     public void addBlog(Blog blog) {
         blogRepository.save(blog);
     }

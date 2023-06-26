@@ -21,66 +21,74 @@ public class BlogController {
     private IBlogTypeService blogTypeService;
 
     @GetMapping()
-    public String getBlogs(@PageableDefault(size = 3) Pageable pageable, Model model){
-        model.addAttribute("list",blogService.displayList(pageable));
+    public String getBlogs(@PageableDefault(size = 3) Pageable pageable, Model model) {
+        model.addAttribute("list", blogService.displayList(pageable));
+        model.addAttribute("blogTypes", blogTypeService.getBlogTypes());
         return "displayList";
     }
 
-    @GetMapping("/add")
-    public String addBlog(Model model){
-        model.addAttribute("blog",new Blog());
+    @GetMapping("/typeOfBlog")
+    public String getBlogs(@PageableDefault(size = 3) Pageable pageable,Model model, @RequestParam int blogTypes) {
+        model.addAttribute("list", blogService.displayListByType(blogTypes,pageable));
         model.addAttribute("blogTypes", blogTypeService.getBlogTypes());
-        return "addBlog";
+        return "displayList";
     }
 
-    @PostMapping("/add")
-    public String addBlog(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes){
-        blogService.addBlog(blog);
-        redirectAttributes.addFlashAttribute("message","Thêm mới thành công");
-        return "redirect:/blog/add";
-    }
+        @GetMapping("/add")
+        public String addBlog (Model model){
+            model.addAttribute("blog", new Blog());
+            model.addAttribute("blogTypes", blogTypeService.getBlogTypes());
+            return "addBlog";
+        }
 
-    @GetMapping("/delete")
-    public String deleteBlog(@RequestParam int id,Model model, RedirectAttributes redirectAttributes){
-        if(blogService.findById(id)==null){
-            redirectAttributes.addFlashAttribute("message","không tìm thấy blog để xóa");
+        @PostMapping("/add")
+        public String addBlog (@ModelAttribute Blog blog, RedirectAttributes redirectAttributes){
+            blogService.addBlog(blog);
+            redirectAttributes.addFlashAttribute("message", "Thêm mới thành công");
+            return "redirect:/blog/add";
+        }
+
+        @GetMapping("/delete")
+        public String deleteBlog ( @RequestParam int id, Model model, RedirectAttributes redirectAttributes){
+            if (blogService.findById(id) == null) {
+                redirectAttributes.addFlashAttribute("message", "không tìm thấy blog để xóa");
+                return "redirect:/blog";
+            }
+            blogService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "xóa thành công");
             return "redirect:/blog";
         }
-        blogService.delete(id);
-        redirectAttributes.addFlashAttribute("message","xóa thành công");
-        return "redirect:/blog";
-    }
 
-    @GetMapping("/detail")
-    public String detailBlog(@RequestParam int id, Model model, RedirectAttributes redirectAttributes){
-        if(blogService.findById(id)==null){
-            redirectAttributes.addFlashAttribute("message","không tìm thấy blog");
+        @GetMapping("/detail")
+        public String detailBlog ( @RequestParam int id, Model model, RedirectAttributes redirectAttributes){
+            if (blogService.findById(id) == null) {
+                redirectAttributes.addFlashAttribute("message", "không tìm thấy blog");
+                return "redirect:/blog";
+            }
+            model.addAttribute("blog", blogService.findById(id));
+            return "detailBlog";
+        }
+
+        @GetMapping("/edit")
+        public String editBlog ( @RequestParam int id, Model model, RedirectAttributes redirectAttributes){
+            if (blogService.findById(id) == null) {
+                redirectAttributes.addFlashAttribute("message", "không tìm thấy blog để sửa");
+                return "redirect:/blog";
+            }
+            model.addAttribute("blog", blogService.findById(id));
+            model.addAttribute("blogTypes", blogTypeService.getBlogTypes());
+            return "editBlog";
+        }
+
+        @PostMapping("/edit")
+        public String editBlog (@ModelAttribute Blog blog, Model model, RedirectAttributes redirectAttributes){
+            if (blogService.findById(blog.getId()) == null) {
+                redirectAttributes.addFlashAttribute("message", "không tìm thấy blog để sửa");
+                return "redirect:/blog";
+            }
+            blogService.addBlog(blog);
+            redirectAttributes.addFlashAttribute("message", "sửa thành công");
             return "redirect:/blog";
         }
-        model.addAttribute("blog",blogService.findById(id));
-        return "detailBlog";
-    }
 
-    @GetMapping("/edit")
-    public String editBlog(@RequestParam int id,Model model, RedirectAttributes redirectAttributes){
-        if(blogService.findById(id)==null){
-            redirectAttributes.addFlashAttribute("message","không tìm thấy blog để sửa");
-            return "redirect:/blog";
-        }
-        model.addAttribute("blog",blogService.findById(id));
-        model.addAttribute("blogTypes", blogTypeService.getBlogTypes());
-        return "editBlog";
     }
-
-    @PostMapping("/edit")
-    public String editBlog(@ModelAttribute Blog blog, Model model, RedirectAttributes redirectAttributes){
-        if(blogService.findById(blog.getId())==null){
-            redirectAttributes.addFlashAttribute("message","không tìm thấy blog để sửa");
-            return "redirect:/blog";
-        }
-        blogService.addBlog(blog);
-        redirectAttributes.addFlashAttribute("message","sửa thành công");
-        return "redirect:/blog";
-    }
-
-}
