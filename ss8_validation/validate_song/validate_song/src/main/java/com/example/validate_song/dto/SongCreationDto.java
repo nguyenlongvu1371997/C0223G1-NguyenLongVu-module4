@@ -1,15 +1,14 @@
-package com.example.validate_song.SongDto;
+package com.example.validate_song.dto;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class SongCreationDto implements Validator {
-    private int id;
+    private Integer id;
     @NotBlank(message = "không được để trống")
     @Size(max = 800, message = "không được quá 800 kí tự")
     @Pattern(regexp = "^\\w+(\\s{1}\\w+)*$")
@@ -31,7 +30,7 @@ public class SongCreationDto implements Validator {
         this.deleteIsTrue = deleteIsTrue;
     }
 
-    public SongCreationDto(int id, String name, String artist, String kindOfMusic, boolean deleteIsTrue) {
+    public SongCreationDto(Integer id, String name, String artist, String kindOfMusic, boolean deleteIsTrue) {
         this.id = id;
         this.name = name;
         this.artist = artist;
@@ -42,11 +41,11 @@ public class SongCreationDto implements Validator {
     public SongCreationDto() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

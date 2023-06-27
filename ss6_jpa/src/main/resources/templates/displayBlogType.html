@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Danh mục</td>
+        <td>Xóa</td>
+        <td>Sửa</td>
+    </tr>
+    <tr th:each="blogType, iterStats: ${list}">
+        <td th:text="${blogType.name}"></td>
+        <td>
+            <form method="get" action="/blogType/delete">
+                <input th:name="id" th:value="${blogType.id}" hidden>
+                <button type="submit">Xóa</button>
+            </form>
+        </td>
+        <td>
+            <form method="get" action="/blogType/edit">
+                <input th:name="id" th:value="${blogType.id}" hidden>
+                <button type="submit">Sửa</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -20,7 +20,7 @@
         <th>Tên</th>
         <th>Ngày</th>
         <th>Tác giả</th>
-        <th>Loại blog</th>
+        <th>Danh mục</th>
         <th colspan="3"></th>
     </tr>
     <tr th:each="blog, iterStats : ${list}">
@@ -34,11 +34,11 @@
         <td><a th:href="@{/blog/detail(id=${blog.id})}">Xem chi tiết</a></td>
     </tr>
 </table>
-<!--<div class="d-flex">-->
-<!--    <a th:if="${list.hasPrevious()}"-->
-<!--       th:href="@{/blog(page=${list.number - 1})}">Trang trước</a>-->
-<!--    <a th:if="${list.hasNext()}"-->
-<!--       th:href="@{/blog(page=${list.number + 1})}">Trang sau</a>-->
-<!--</div>-->
+<div class="d-flex">
+    <a th:if="${list.hasPrevious()}"
+       th:href="@{/blog(page=${list.number - 1})}">Trang trước</a>
+    <a th:if="${list.hasNext()}"
+       th:href="@{/blog(page=${list.number + 1})}">Trang sau</a>
+</div>
 </body>
 </html>

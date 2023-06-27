@@ -9,7 +9,7 @@ import java.util.List;
 public interface IBlogService {
     Page<Blog> displayList(Pageable pageable);
 
-    List<Blog> displayListByType(int type, Pageable pageable);
+    Page<Blog> displayListByType(int type, Pageable pageable);
 
     void addBlog(Blog blog);
 

@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SongService implements ISongService {
     @Autowired
@@ -20,5 +22,15 @@ public class SongService implements ISongService {
     @Override
     public void add(Song song) {
         songRepository.save(song);
+    }
+
+    @Override
+    public Optional<Song> findById(int id) {
+        return songRepository.findById(id);
+    }
+
+    @Override
+    public void deleteSong(int id) {
+        songRepository.deleteById(id);
     }
 }

@@ -6,17 +6,22 @@
 </head>
 <body>
 <a href="/song/create">Thêm mới</a>
+<p th:if="${smg!=null}" th:text="${smg}"></p>
 <form action="/song" method="get">
 <table>
     <tr>
         <td>Tên nghệ sĩ</td>
         <td>Tên bài hát</td>
         <td>Thể loại</td>
+        <td></td>
     </tr>
     <tr th:each="song, iterStats : ${list}">
         <td th:text="${song.artist}"></td>
         <td th:text="${song.name}"></td>
         <td th:text="${song.kindOfMusic}"></td>
+        <td><form action="/song/edit" method="get"><input th:name="id" th:value="${song.id}" hidden><button type="submit">Sửa</button></form></td>
+        <td><form action="/song/delete" method="get"><input th:name="id" th:value="${song.id}" hidden><button type="submit">Xóa</button></form></td>
+
     </tr>
 </table>
     <div class="d-flex">
