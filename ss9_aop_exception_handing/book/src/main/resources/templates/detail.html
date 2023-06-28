@@ -5,8 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/rent">
-
+<form method="post" action="/book/rent">
+    <input th:name="id" th:value="${book.id}" hidden>
+    <button type="submit">Đặt</button>
 </form>
 <table>
   <tr>
@@ -18,5 +19,10 @@
     <td th:text="${book.amount}"></td>
   </tr>
 </table>
+<form method="post" action="/book/return">
+    <input th:name="id" th:value="${book.id}" hidden>
+    Nhập mã trả sách<input th:name="code">
+    <button type="submit">Đặt</button>
+</form>
 </body>
 </html>

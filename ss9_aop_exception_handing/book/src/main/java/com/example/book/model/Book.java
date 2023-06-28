@@ -22,6 +22,10 @@ public class Book {
     public Book() {
     }
 
+    public Book(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
