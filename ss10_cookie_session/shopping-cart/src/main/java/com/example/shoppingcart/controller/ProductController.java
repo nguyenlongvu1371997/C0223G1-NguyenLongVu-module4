@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -24,8 +25,7 @@ public class ProductController {
 
     @GetMapping("/shop")
     public ModelAndView showShop() {
-        ModelAndView modelAndView = new ModelAndView("/shop");
-        modelAndView.addObject("products", productService.findAll());
+        ModelAndView modelAndView = new ModelAndView("/shop", "products", productService.findAll());
         return modelAndView;
     }
 
@@ -42,6 +42,7 @@ public class ProductController {
         cart.addProduct(productOptional.get());
         return "redirect:/shop";
     }
+
     @GetMapping("/decrease/{id}")
     public String decreaseToCart(@PathVariable Long id, @ModelAttribute Cart cart, @RequestParam("action") String action) {
         Optional<Product> productOptional = productService.findById(id);
@@ -56,14 +57,19 @@ public class ProductController {
         cart.addProduct(productOptional.get());
         return "redirect:/shop";
     }
+
     @GetMapping("/detail")
-    public String detailProduct(@RequestParam long id, Model model){
-        model.addAttribute("product",productService.findById(id).get());
+    public String detailProduct(@RequestParam long id, Model model, RedirectAttributes redirectAttributes) {
+        if(!productService.findById(id).isPresent()){
+            redirectAttributes.addFlashAttribute("msg","không tìm thấy");
+            return "redirect:/shop";
+        }
+        model.addAttribute("product", productService.findById(id).get());
         return "/detail";
     }
 
     @GetMapping("/order")
-    public String orderProduct(@ModelAttribute Cart cart){
+    public String orderProduct(@ModelAttribute Cart cart) {
 
         cart.resetAll();
         return "redirect:/shop";

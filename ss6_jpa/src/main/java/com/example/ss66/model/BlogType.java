@@ -10,18 +10,11 @@ public class BlogType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    @OneToMany(mappedBy = "blogType")
-    private List<Blog> blogs;
-
-    public BlogType(int id, String name, List<Blog> blogs) {
-        this.id = id;
-        this.name = name;
-        this.blogs = blogs;
-    }
 
     public BlogType(int id, String name) {
         this.id = id;
         this.name = name;
+
     }
 
     public BlogType() {
@@ -43,11 +36,4 @@ public class BlogType {
         this.name = name;
     }
 
-    public List<Blog> getBlogs() {
-        return blogs;
-    }
-
-    public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
-    }
 }

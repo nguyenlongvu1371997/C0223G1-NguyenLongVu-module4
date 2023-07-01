@@ -10,6 +10,7 @@ public class Product {
     private Long id;
     private String name;
     private double price;
+    @Column(columnDefinition = "LongText")
     private String description;
 
     public Product(Long id, String name, double price, String description) {

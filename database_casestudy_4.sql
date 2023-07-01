@@ -38,16 +38,74 @@ location varchar(4),
 primary key(room_id,location)
 );
 
+create table poisition(
+id int auto_increment primary key,
+`name` varchar(50)
+);
+
+create table employee(
+id int auto_increment primary key,
+`name` varchar(50),
+phone_number varchar(12),
+email varchar(50),
+date_of_birth date,
+citizen_id varchar(15),
+poisition_id int,
+foreign key(poisition_id) references poisition(id)
+);
+
 create table movie_showtime(
 id int auto_increment primary key,
-id_movie int,
-foreign key(id_movie) references movie(id),
-id_room int,
-foreign key(id_room) references room(id),
+movie_id int,
+foreign key(movie_id) references movie(id),
+room_id int,
+foreign key(room_id) references room(id),
 show_date date,
 show_time time
 );
 
+create table seat(
+location varchar(4),
+id_movie_showtime int,
+foreign key(id_movie_showtime) references movie_showtime(id),
+primary key(location, id_movie_showtime),
+`status` boolean
+);
 
+create table members(
+id int auto_increment primary key,
+`name` varchar(30)
+);
 
+create table customer(
+id int auto_increment primary key,
+`name` varchar(50),
+phone_number varchar(12),
+email varchar(50),
+date_of_birth date,
+members int,
+foreign key(members) references members(id)
+);
 
+create table ticket(
+id int auto_increment primary key,
+id_movie_showtime int,
+foreign key(id_movie_showtime) references movie_showtime(id),
+location varchar(4),
+foreign key(location) references seat(location),
+id_employee int,
+foreign key(id_employee) references employee(id),
+id_customer int,
+foreign key(id_customer) references customer(id),
+ticket_code varchar(50)
+);
+
+create table users(
+id varchar(50) primary key,
+pass varchar(50) not null,
+id_customer int,
+foreign key(id_customer) references customer(id),
+roles int
+);
+
+delete from book_rent where book_id=1 limit 1;
