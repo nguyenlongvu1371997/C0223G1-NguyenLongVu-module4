@@ -5,14 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<form method="get" action="/blog/typeOfBlog">
-<select name="blogTypes" >
-    <option th:each="blogType, iterStats : ${blogTypes}" th:value="${blogType.id}" th:text="${blogType.name}">
-    </option>
-</select>
-    <button type="submit">Tìm</button>
-    </form>
-<a href="/blog/add">Thêm mới</a>
+<input id="name">
+<button type="button" onclick="findByName()">Tìm</button>
 <div th:if="${message!=null}" th:text="${message}"></div>
 <table border="1">
     <tr>
@@ -23,22 +17,76 @@
         <th>Danh mục</th>
         <th colspan="3"></th>
     </tr>
-    <tr th:each="blog, iterStats : ${list}">
-        <td th:text="${blog.id}"></td>
-        <td th:text="${blog.name}"></td>
-        <td th:text="${blog.date}"></td>
-        <td th:text="${blog.author}"></td>
-        <td th:text="${blog.blogType.name}"></td>
-        <td><a th:href="@{/blog/delete(id=${blog.id})}">Xóa</a></td>
-        <td><a th:href="@{/blog/edit(id=${blog.id})}">Sửa</a></td>
-        <td><a th:href="@{/blog/detail(id=${blog.id})}">Xem chi tiết</a></td>
-    </tr>
+    <tbody id="listBlogs"></tbody>
 </table>
-<div class="d-flex">
-    <a th:if="${list.hasPrevious()}"
-       th:href="@{/blog(page=${list.number - 1})}">Trang trước</a>
-    <a th:if="${list.hasNext()}"
-       th:href="@{/blog(page=${list.number + 1})}">Trang sau</a>
-</div>
+<button type="button" onclick="getListBlogs()">Hiển thị thêm</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    let number = 0
+    function getListBlogs() {
+        number+=2
+        $.ajax({
+            url: 'http://localhost:8080/blogs/limit/'+number,
+            type: 'GET',
+            data: JSON.stringify(number),
+            success: function (data) {
+                console.log(JSON.stringify(data))
+                let blogStr = '';
+                for (let blog of data) {
+                    blogStr += `
+     <tr>
+        <td>${blog.id}</td>
+        <td>${blog.name}</td>
+        <td>${blog.date}</td>
+        <td>${blog.author}</td>
+        <td>${blog.blogType.name}</td>
+        <td><button type="button">Xóa</button></td>
+        <td><button type="button">Xem chi tiết</button></td>
+        <td><button type="button">Sửa</button></td>
+    </tr>
+                `;
+                }
+                $("#listBlogs").html(blogStr);
+            },
+            error: function (error) {
+
+            }
+        })
+    }
+    $(document).ready(function (){
+            getListBlogs();
+        })
+    function findByName() {
+        const name= $("#name").val();
+        $.ajax({
+            url: 'http://localhost:8080/blogs/findByName/'+name,
+            type: 'POST',
+            data: JSON.stringify(name),
+            success: function (data) {
+                console.log(JSON.stringify(data))
+                let blogStr = '';
+                for (let blog of data) {
+                    blogStr += `
+     <tr>
+        <td>${blog.id}</td>
+        <td>${blog.name}</td>
+        <td>${blog.date}</td>
+        <td>${blog.author}</td>
+        <td>${blog.blogType.name}</td>
+        <td><button type="button">Xóa</button></td>
+        <td><button type="button">Xem chi tiết</button></td>
+        <td><button type="button">Sửa</button></td>
+    </tr>
+                `;
+                }
+                $("#listBlogs").html(blogStr);
+            },
+            error: function (error) {
+
+            }
+        })
+    }
+
+</script>
 </body>
 </html>

@@ -12,8 +12,8 @@ import java.util.List;
 
 @Repository
 public interface IBlogRepository extends JpaRepository<Blog, Integer> {
-    @Query(value = "SELECT * FROM blogs as b where UPPER(b.name) like concat(upper(:name),'%' )", nativeQuery = true)
-    List<Blog> searchForName(@Param(value = "name") String name);
+
+    List<Blog> findBlogByNameContainingAndFlagDeleteIsFalse(String name);
 
     Page<Blog> findAllByFlagDeleteIsFalse(Pageable pageable);
 
@@ -22,4 +22,7 @@ public interface IBlogRepository extends JpaRepository<Blog, Integer> {
 
     @Query(value = "SELECT * FROM blogs as b where b.type_of_blog_id = :id", nativeQuery = true)
     List<Blog> findAllByTypeOfBlogIs(@Param(value = "id") int id);
+
+    @Query(value = "SELECT * FROM blogs limit :limit",nativeQuery = true)
+    List<Blog> getBlogLimit(@Param(value = "limit") int limit);
 }

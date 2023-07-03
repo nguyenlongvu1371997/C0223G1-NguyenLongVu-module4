@@ -17,6 +17,10 @@ public class BlogType {
 
     }
 
+    public BlogType(int id) {
+        this.id = id;
+    }
+
     public BlogType() {
     }
 

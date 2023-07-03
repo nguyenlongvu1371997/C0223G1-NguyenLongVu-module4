@@ -24,6 +24,8 @@ public class BlogService implements IBlogService {
         return blogRepository.findAll();
     }
 
+
+
     @Override
     public Page<Blog> displayListByType(int type, Pageable pageable) {
         return blogRepository.findAllByTypeOfBlogIs(type,pageable);
@@ -48,7 +50,7 @@ public class BlogService implements IBlogService {
 
     @Override
     public List<Blog> findByName(String name) {
-        return blogRepository.searchForName(name);
+        return blogRepository.findBlogByNameContainingAndFlagDeleteIsFalse(name);
     }
 
     @Override
@@ -56,5 +58,10 @@ public class BlogService implements IBlogService {
         Blog blog = blogRepository.findById(id).get();
         blog.setFlagDelete(true);
         blogRepository.save(blog);
+    }
+
+    @Override
+    public List<Blog> getListLimit(int limit) {
+        return blogRepository.getBlogLimit(limit);
     }
 }

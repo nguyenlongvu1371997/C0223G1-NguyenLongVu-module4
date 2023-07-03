@@ -9,15 +9,15 @@ import javax.persistence.*;
 @Table(name = "blogs")
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String date;
     private String author;
     @Column(length = 2000)
     private String content;
     @ManyToOne
-    @JoinColumn(name = "type_of_blog_id", nullable = false)
+    @JoinColumn(name = "type_of_blog_id", referencedColumnName = "id",nullable = true)
     private BlogType blogType;
     private boolean flagDelete;
 
@@ -30,7 +30,7 @@ public class Blog {
         this.flagDelete = flagDelete;
     }
 
-    public Blog(int id, String name, String date, String author, String content, BlogType blogType, boolean isDelete) {
+    public Blog(Integer id, String name, String date, String author, String content, BlogType blogType, boolean isDelete) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -40,7 +40,7 @@ public class Blog {
         this.flagDelete = isDelete;
     }
 
-    public Blog(int id, String name, String date, String author, String content, BlogType blogType) {
+    public Blog(Integer id, String name, String date, String author, String content, BlogType blogType) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -49,7 +49,7 @@ public class Blog {
         this.blogType = blogType;
     }
 
-    public Blog(int id, String name, String date, String author, String content) {
+    public Blog(Integer id, String name, String date, String author, String content) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -67,11 +67,11 @@ public class Blog {
     public Blog() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

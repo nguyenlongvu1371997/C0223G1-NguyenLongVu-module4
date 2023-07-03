@@ -10,6 +10,8 @@ public interface IBlogService {
     Page<Blog> displayList(Pageable pageable);
     List<Blog> getBlog();
 
+
+
     Page<Blog> displayListByType(int type, Pageable pageable);
     List<Blog> displayListByType(int type);
 
@@ -20,5 +22,6 @@ public interface IBlogService {
     List<Blog> findByName(String name);
 
     void delete(int id);
+    List<Blog> getListLimit(int limit);
 
 }
